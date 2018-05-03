@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "facturayan", "facturayan\facturayan.csproj", "{CF4AA6FF-AE59-4471-8C6D-98BC6A141105}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Tu estilo2", "Tu estilo2\Tu estilo2.vdproj", "{DFE494B1-F4C1-4DC9-979D-E1C0CB18CCE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF4AA6FF-AE59-4471-8C6D-98BC6A141105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4AA6FF-AE59-4471-8C6D-98BC6A141105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4AA6FF-AE59-4471-8C6D-98BC6A141105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4AA6FF-AE59-4471-8C6D-98BC6A141105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFE494B1-F4C1-4DC9-979D-E1C0CB18CCE9}.Debug|Any CPU.ActiveCfg = Debug
+		{DFE494B1-F4C1-4DC9-979D-E1C0CB18CCE9}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC133844-1EC5-4D53-A2C5-3112197FEB52}
+	EndGlobalSection
+EndGlobal
