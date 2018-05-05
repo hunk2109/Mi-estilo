@@ -40,6 +40,7 @@ namespace facturayan
             operaciones oper = new operaciones();
             DataTable dgvdatos = oper.cosnsultaconresultado("select * from producto");
             DataTable dc = oper.cosnsultaconresultado("select * from cliente");
+            DataTable dt = oper.cosnsultaconresultado("select * from factura");
             foreach (DataRow dr in dgvdatos.Rows)
             {
                 string prod;
@@ -53,6 +54,14 @@ namespace facturayan
                 string cliet;
                 cliet = dr["nombre"].ToString();
                 cmbcliente.Items.Add(cliet);
+            }
+
+
+            foreach(DataRow dr in dt.Rows)
+            {
+                string fac;
+                fac = dr["id_fac"].ToString();
+                cmbfac.Items.Add(fac);
             }
 
 
@@ -95,13 +104,13 @@ namespace facturayan
             operaciones oper = new operaciones();
             DataSet ds= new DataSet();
             DataSet ds2 = new DataSet();
-            DataTable dt = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura, nombre as Nombre,tel as Telefono,direccion as Direccion  from cotizacion   where factura_id_fac = '" + txtfactn.Text+"' ");
-            DataTable dt2 = oper.cosnsultaconresultado("select sum(cantidad*precio) as Total from cotizacion where factura_id_fac = '" + txtfactn.Text + "' ");
+            DataTable dt = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura, nombre as Nombre,tel as Telefono,direccion as Direccion  from cotizacion   where factura_id_fac = '" + cmbfac.Text + "' ");
+            DataTable dt2 = oper.cosnsultaconresultado("select sum(cantidad*precio) as Total from cotizacion where factura_id_fac = '" + cmbfac.Text + "' ");
             ds.Tables.Add(dt);
             ds2.Tables.Add(dt2);
             ds.WriteXml(@"C:\factura\Factura.xml");
             ds2.WriteXml(@"C:\factura\suma.xml");
-            oper.consultasinreaultado("insert into factura(id_fac,fecha)values('" + txtfactn.Text + "','" + dtpfac.Text + "')");
+            oper.consultasinreaultado("insert into factura(id_fac,fecha)values('" + cmbfac.Text + "','" + dtpfac.Text + "')");
             vso f = new vso();
             f.Show();
         }
@@ -114,9 +123,9 @@ namespace facturayan
         private void btnagre_Click(object sender, EventArgs e)
         {
             operaciones oper = new operaciones();
-            oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,nombre,tel,direccion,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','"+cmbcliente.Text+"','"+txttel.Text+"','"+txtdirecc.Text+"','"+ txtfactn.Text+"')");
+            oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,nombre,tel,direccion,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','"+cmbcliente.Text+"','"+txttel.Text+"','"+txtdirecc.Text+"','"+ cmbfac.Text + "')");
             
-            dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura  from cotizacion where factura_id_fac = '"+txtfactn.Text+"' ");
+            dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura  from cotizacion where factura_id_fac = '"+ cmbfac.Text + "' ");
 
         }
 
@@ -140,7 +149,7 @@ namespace facturayan
         private void dgvcoti_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow act = dgvcoti.Rows[e.RowIndex];
-            txtfactn.Text = act.Cells["Factura"].Value.ToString();
+            cmbfac.Text = act.Cells["Factura"].Value.ToString();
            
 
         }
@@ -152,9 +161,7 @@ namespace facturayan
 
         private void txtfactn_TextChanged(object sender, EventArgs e)
         {
-            operaciones oper = new operaciones();
-           dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura, nombre as Nombre,tel as Telefono  from cotizacion   where factura_id_fac like '%" + txtfactn.Text + "%' ");
-
+            
         }
 
         private void actualizarProductoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -180,9 +187,9 @@ namespace facturayan
             if (e.KeyCode == Keys.Enter)
             {
                 operaciones oper = new operaciones();
-                oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,cliente_id_clie,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','" + txtid.Text + "','" + txtfactn.Text + "')");
+                oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,cliente_id_clie,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','" + txtid.Text + "','" + cmbfac.Text + "')");
 
-                dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,cliente_id_clie as Cliente,factura_id_fac as Factura  from cotizacion where factura_id_fac = '" + txtfactn.Text + "' ");
+                dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,cliente_id_clie as Cliente,factura_id_fac as Factura  from cotizacion where factura_id_fac = '" + cmbfac.Text + "' ");
 
             }
 
@@ -199,11 +206,20 @@ namespace facturayan
             if (e.KeyCode == Keys.Enter)
             {
                 operaciones oper = new operaciones();
-                oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,cliente_id_clie,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','" + txtid.Text + "','" + txtfactn.Text + "')");
+                oper.consultasinreaultado("insert into cotizacion(descrip,cantidad,precio,cliente_id_clie,factura_id_fac)values('" + cmbproducto.Text + "','" + txtcantidad.Text + "','" + txtprecio.Text + "','" + txtid.Text + "','" + cmbfac.Text + "')");
 
-                dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,cliente_id_clie as Cliente,factura_id_fac as Factura  from cotizacion where factura_id_fac = '" + txtfactn.Text + "' ");
+                dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,cliente_id_clie as Cliente,factura_id_fac as Factura  from cotizacion where factura_id_fac = '" + cmbfac.Text + "' ");
 
             }
+
+
+        }
+
+        private void cmbfac_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            operaciones oper = new operaciones();
+            dgvcoti.DataSource = oper.cosnsultaconresultado("select descrip as Descripcion,cantidad as Cantidad,precio as Precio,(cantidad*precio) as Importe,factura_id_fac as Factura, nombre as Nombre,tel as Telefono  from cotizacion   where factura_id_fac like '%" + cmbfac.Text + "%' ");
+
 
 
         }

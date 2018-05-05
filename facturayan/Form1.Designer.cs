@@ -51,7 +51,6 @@
             this.cmbproducto = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbx = new System.Windows.Forms.GroupBox();
-            this.txtfactn = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtid = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -64,6 +63,7 @@
             this.dgvcoti = new System.Windows.Forms.DataGridView();
             this.btnimpri = new System.Windows.Forms.Button();
             this.btnagre = new System.Windows.Forms.Button();
+            this.cmbfac = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbx.SuspendLayout();
@@ -262,7 +262,7 @@
             // 
             // gbx
             // 
-            this.gbx.Controls.Add(this.txtfactn);
+            this.gbx.Controls.Add(this.cmbfac);
             this.gbx.Controls.Add(this.label9);
             this.gbx.Controls.Add(this.txtid);
             this.gbx.Controls.Add(this.label8);
@@ -278,15 +278,6 @@
             this.gbx.TabIndex = 5;
             this.gbx.TabStop = false;
             this.gbx.Text = "Clientes";
-            // 
-            // txtfactn
-            // 
-            this.txtfactn.Location = new System.Drawing.Point(282, 13);
-            this.txtfactn.Name = "txtfactn";
-            this.txtfactn.Size = new System.Drawing.Size(100, 20);
-            this.txtfactn.TabIndex = 9;
-            this.txtfactn.TextChanged += new System.EventHandler(this.txtfactn_TextChanged);
-            this.txtfactn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtfactn_KeyDown);
             // 
             // label9
             // 
@@ -401,6 +392,15 @@
             this.btnagre.Click += new System.EventHandler(this.btnagre_Click);
             this.btnagre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnagre_KeyDown);
             // 
+            // cmbfac
+            // 
+            this.cmbfac.FormattingEnabled = true;
+            this.cmbfac.Location = new System.Drawing.Point(283, 13);
+            this.cmbfac.Name = "cmbfac";
+            this.cmbfac.Size = new System.Drawing.Size(121, 21);
+            this.cmbfac.TabIndex = 9;
+            this.cmbfac.SelectedIndexChanged += new System.EventHandler(this.cmbfac_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,7 +459,6 @@
         private System.Windows.Forms.TextBox txtid;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnagre;
-        private System.Windows.Forms.TextBox txtfactn;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolStripMenuItem facturaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verFacturaToolStripMenuItem;
@@ -467,6 +466,7 @@
         private System.Windows.Forms.ToolStripMenuItem actualizarClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cotizacionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizarCotizacionToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmbfac;
     }
 }
 
